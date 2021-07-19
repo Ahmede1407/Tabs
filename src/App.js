@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Loader from "./loader/Loader";
 
 import { FaAngleDoubleRight } from "react-icons/fa";
 
@@ -21,8 +22,8 @@ const App = () => {
 
   if (loading) {
     return (
-      <section className="loading section">
-        <h1>loading ... </h1>
+      <section>
+        <Loader></Loader>
       </section>
     );
   }
@@ -35,10 +36,23 @@ const App = () => {
         <h1>expierence</h1>
         <div className="underline"></div>
       </div>
-      <div className="job-center">
+      <div className="jobs-center">
         {/* button container */}
+        <div className="btn-container">
+          {jobs.map((job, index) => {
+            return (
+              <button
+                key={job.id}
+                onClick={() => setValue(index)}
+                className={`job-btn ${index === value && "active-btn"}`}
+              >
+                {job.company}
+              </button>
+            );
+          })}
+        </div>
         {/* info */}
-        <articel className="job-info">
+        <article className="job-info">
           <h3>{title}</h3>
           <h4>{company}</h4>
           <p className="job-date">{dates}</p>
@@ -50,7 +64,7 @@ const App = () => {
               </div>
             );
           })}
-        </articel>
+        </article>
       </div>
     </section>
   );
